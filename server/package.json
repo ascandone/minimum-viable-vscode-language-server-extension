@@ -4,6 +4,9 @@
   "version": "1.0.0",
   "author": "REPLACE_ME",
   "license": "MIT",
+  "scripts": {
+    "test": "vitest"
+  },
   "engines": {
     "node": "*"
   },
@@ -14,5 +17,8 @@
   "dependencies": {
     "vscode-languageserver": "^8.1.0",
     "vscode-languageserver-textdocument": "^1.0.8"
+  },
+  "devDependencies": {
+    "vitest": "^1.6.0"
   }
 }
