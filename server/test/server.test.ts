@@ -2,11 +2,6 @@ import { expect, test } from "vitest";
 import { MessageBuffer } from "../src/message-buffer";
 import { Message } from "../src/protocol";
 
-import readline from "node:readline";
-import { stdin as input, stdout as output } from "node:process";
-
-const rl = readline.createInterface({ input, output });
-
 test("parse entire message", () => {
   const sentMsg = {
     x: 42,
