@@ -15,10 +15,12 @@
     "url": "REPLACE_ME"
   },
   "dependencies": {
+    "ts-decode": "^0.0.14",
     "vscode-languageserver": "^8.1.0",
     "vscode-languageserver-textdocument": "^1.0.8"
   },
   "devDependencies": {
+    "typescript": "^5.5.2",
     "vitest": "^1.6.0"
   }
 }
