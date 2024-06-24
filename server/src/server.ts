@@ -4,15 +4,20 @@ import * as dec from "ts-decode";
 
 const msgBuf = new MessageBuffer();
 
-function initialize(): object {
-  return {
-    capabilities: {},
-    serverInfo: {
-      name: "lsp-from-scratch",
-      version: "0.0.1",
-    },
-  };
-}
+const initialize: RespondMethod = () => ({
+  capabilities: {
+    completionProvider: {},
+  },
+  serverInfo: {
+    name: "lsp-from-scratch",
+    version: "0.0.1",
+  },
+});
+
+const completion: RespondMethod = () => ({
+  isIncomplete: false,
+  items: [{ label: "l1" }, { label: "l2" }, { label: "l3" }],
+});
 
 const requestMsgParser = dec.object({
   method: dec.string.required,
@@ -23,15 +28,16 @@ type RespondMethod = (msg: unknown) => object;
 
 const methods: Record<string, RespondMethod> = {
   initialize,
+  "textDocument/completion": completion,
 };
 
 process.stdin.on("data", (chunk) => {
   const receivedMsg = msgBuf.receiveData(chunk);
-  write("received", receivedMsg);
-
   if (receivedMsg === undefined) {
     return;
   }
+
+  write("received", receivedMsg);
 
   const result = requestMsgParser.decode(receivedMsg);
   if (result.error) {
