@@ -27,7 +27,7 @@ const methods: Record<string, RespondMethod> = {
 
 process.stdin.on("data", (chunk) => {
   const receivedMsg = msgBuf.receiveData(chunk);
-  write({ receivedMsg });
+  write("received", receivedMsg);
 
   if (receivedMsg === undefined) {
     return;
@@ -53,5 +53,6 @@ process.stdin.on("data", (chunk) => {
 
   const len = Buffer.byteLength(outMsg, "utf-8");
 
+  write("sent", outMsg);
   process.stdout.write(`Content-Length: ${len}\r\n\r\n${outMsg}`);
 });
